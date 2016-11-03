@@ -152,6 +152,8 @@ public final class energon2 extends JPanel {
         mt.setTransformGroup(objRotate);
         lineGroup.addChild(mt);
         
+        ///setup mouse for pillar
+        
         MouseRotate f11=new MouseRotate();
         f11.setSchedulingBounds(new BoundingSphere());
         f11.setTransformGroup(tg);
@@ -174,7 +176,7 @@ public final class energon2 extends JPanel {
         ///add stuff on temple here
         Cylinder pillar = new Cylinder(0.1f,0.5f, ap);
         Transform3D Transform = new Transform3D();
-        Vector3f vector = new Vector3f(0f,0f,1.5f);
+        Vector3f vector = new Vector3f(-0.5f,0.3f,1.5f);
         Transform.setTranslation(vector);
         tg.setTransform(Transform);
         tg.addChild(pillar);

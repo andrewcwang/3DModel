@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>3djavaapi</name>
+	<name>3djavaapi2</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/energon2.java</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Documents/GitHub/3DModel/energon2.java</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
