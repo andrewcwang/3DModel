@@ -176,8 +176,8 @@ public final class energon2 extends JPanel {
         ///add stuff on temple here
         Cylinder pillar = new Cylinder(0.1f,0.5f, ap);
         Transform3D Transform = new Transform3D();
-        Vector3f vector = new Vector3f(-0.5f,0.3f,1.5f);
-        Transform.setTranslation(vector);
+        Vector3f vector = new Vector3f(1f,-1f,-1f);
+        Transform.setTranslation(normals[3]);
         tg.setTransform(Transform);
         tg.addChild(pillar);
         
