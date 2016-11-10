@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.vecmath.Color3f;
+import javax.vecmath.Matrix3d;
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3f;
 import javax.vecmath.Vector3f;
@@ -49,6 +50,7 @@ public final class energon2 extends JPanel {
 
         QuadArray lsa = new QuadArray(48,QuadArray.COORDINATES|QuadArray.NORMALS);
         Vector3f [] normals=new Vector3f[24];
+        Vector3f normals2 = new Vector3f(0f,0f,0f);
         for(int i=0;i<24;i++)normals[i]=new Vector3f();
         Point3f [] pts=new Point3f[24];
         for(int i=0;i<24;i++)pts[i]=new Point3f();
@@ -56,12 +58,12 @@ public final class energon2 extends JPanel {
         for(int i=0;i<24;i++)clrs[i]=new Color3f(0.5f,0.5f,0.5f);
         //cube=6 quads 
         //first quad
-        pts[0].x=0f;pts[0].y=0f;pts[0].z=1.5f;
-        pts[1].x=0f;pts[1].y=0.3f;pts[1].z=1.5f;
-        pts[2].x=1.5f;pts[2].y=0.3f;pts[2].z=1.5f;
-        pts[3].x=1.5f;pts[3].y=0f;pts[3].z=1.5f;
+        pts[0].x=0f;pts[0].y=0f;pts[0].z=-0.25f;
+        pts[1].x=0f;pts[1].y=0.3f;pts[1].z=-0.25f;
+        pts[2].x=1.5f;pts[2].y=0.3f;pts[2].z=-0.25f;
+        pts[3].x=1.5f;pts[3].y=0f;pts[3].z=-0.25f;
         normals[0].x=-1;normals[1].x=-1;normals[2].x=-1;normals[3].x=-1;
-        //second quad
+        /*//second quad
         pts[4].x=0f;pts[4].y=0f;pts[4].z=1.5f;
         pts[5].x=0f;pts[5].y=0.3f;pts[5].z=1.5f;
         pts[6].x=1.5f;pts[6].y=0.3f;pts[6].z=1.5f;
@@ -91,8 +93,8 @@ public final class energon2 extends JPanel {
         pts[21].x=0f;pts[21].y=0.3f;pts[21].z=1.5f;
         pts[22].x=1.5f;pts[22].y=0.3f;pts[22].z=1.5f;
         pts[23].x=1.5f;pts[23].y=0f;pts[23].z=1.5f;
-        normals[20].y=1;normals[21].y=1;normals[22].y=1;normals[23].y=1;
-        lsa.setNormals(0, normals);
+        normals[20].y=1;normals[21].y=1;normals[22].y=1;normals[23].y=1;*/
+        lsa.setNormal(0, normals2);
         lsa.setCoordinates(0, pts);
         Shape3D sh=new Shape3D();
         PolygonAttributes pa=new PolygonAttributes();
@@ -119,56 +121,58 @@ public final class energon2 extends JPanel {
         
         TransformGroup objRotate = new TransformGroup();
         objRotate.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-        objRotate.addChild(sh);
+        //objRotate.addChild(sh);
         
         TransformGroup tg = new TransformGroup();
         tg.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
         tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        tg.addChild(sh);
 
         DirectionalLight light1=new DirectionalLight();
         light1.setInfluencingBounds(new BoundingSphere(new Point3d(-5.0,0,0),10.0));
         light1.setColor(new Color3f(1f,1f,1f));
         light1.setDirection(new Vector3f(0,1,0));
-        objRotate.addChild(light1);
+        tg.addChild(light1);
         DirectionalLight light2=new DirectionalLight();
         light2.setInfluencingBounds(new BoundingSphere(new Point3d(5.0,0,0),10.0));
         light2.setColor(new Color3f(0.5f,1f,0.5f));
         light2.setDirection(new Vector3f(0,-1,0));
-        objRotate.addChild(light2);
+        tg.addChild(light2);
         MouseRotate f1=new MouseRotate();
         f1.setSchedulingBounds(new BoundingSphere());
-        f1.setTransformGroup(objRotate);
+        f1.setTransformGroup(tg);
         lineGroup.addChild(f1);
         ///Initialize and setup mouse zooming
         ///Note: use alt-click & dragging to zoom in/out
         MouseZoom mz = new MouseZoom();
-        mz.setTransformGroup(objRotate);
+        mz.setTransformGroup(tg);
         lineGroup.addChild(mz);
         mz.setSchedulingBounds(new BoundingSphere());
         ///Initialize and setup mouse translation
         ///Note: use right click dragging to move object
         MouseTranslate mt = new MouseTranslate();
         mt.setSchedulingBounds(new BoundingSphere(new Point3d(5.0,0,0),10.0));
-        mt.setTransformGroup(objRotate);
+        mt.setTransformGroup(tg);
         lineGroup.addChild(mt);
         
         ///setup mouse for pillar
         
         MouseRotate f11=new MouseRotate();
         f11.setSchedulingBounds(new BoundingSphere());
-        f11.setTransformGroup(tg);
+        f11.setTransformGroup(objRotate);
         lineGroup.addChild(f11);
         ///Initialize and setup mouse zooming
         ///Note: use alt-click & dragging to zoom in/out
         MouseZoom mz1 = new MouseZoom();
-        mz1.setTransformGroup(tg);
+        mz1.setTransformGroup(objRotate);
         lineGroup.addChild(mz1);
         mz1.setSchedulingBounds(new BoundingSphere());
         ///Initialize and setup mouse translation
         ///Note: use right click dragging to move object
         MouseTranslate mt1 = new MouseTranslate();
         mt1.setSchedulingBounds(new BoundingSphere(new Point3d(5.0,0,0),10.0));
-        mt1.setTransformGroup(tg);
+        mt1.setTransformGroup(objRotate);
         lineGroup.addChild(mt1);
         
         Appearance ap = new Appearance();
@@ -176,10 +180,16 @@ public final class energon2 extends JPanel {
         ///add stuff on temple here
         Cylinder pillar = new Cylinder(0.1f,0.5f, ap);
         Transform3D Transform = new Transform3D();
-        Vector3f vector = new Vector3f(1f,-1f,-1f);
-        Transform.setTranslation(normals[3]);
+        ///Vector3f vector = new Vector3f(1f,-1f,-1f);
+        Transform.setTranslation(normals2);
+        Transform3D rotation = new Transform3D();
+        rotation.rotX(Math.PI/2);
+        rotation.setTranslation(normals2);
+        objRotate.setTransform(rotation);
         tg.setTransform(Transform);
-        tg.addChild(pillar);
+        //tg.addChild(pillar);
+        //objRotate.setTransform(Transform);
+        objRotate.addChild(pillar);
         
         lineGroup.addChild(objRotate);
         lineGroup.addChild(tg);
