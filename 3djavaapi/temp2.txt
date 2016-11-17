@@ -1,0 +1,18 @@
+arc (cylinder)/rectangle/cone/any3dshape:
+
+vector3f x: 
+vector3f y:
+w:
+h: (z from GUI)
+
+(Note, for a sphere, "h" can be anything since it's meaningless. A sphere only has a radius "w")
+
+line:
+have start/end points
+
+x1:
+y1:
+x2:
+y2:
+
+NOTE: Every line in the .txt file must end with 0.
