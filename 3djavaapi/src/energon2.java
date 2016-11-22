@@ -65,10 +65,10 @@ public final class energon2 extends JPanel implements MouseBehaviorCallback {
         pa.setPolygonMode(PolygonAttributes.POLYGON_FILL);
         pa.setCullFace(PolygonAttributes.CULL_NONE);
         Material mat=new Material();
-        mat.setEmissiveColor(new Color3f(0.5f,0.5f,0.5f));
-        mat.setAmbientColor(new Color3f(0.1f,0.1f,0.1f));
-        mat.setDiffuseColor(new Color3f(0.2f,0.3f,0.4f));
-        mat.setSpecularColor(new Color3f(0.6f,0.3f,0.2f));
+        mat.setEmissiveColor(new Color3f(1f,1f,0.8f));
+        mat.setAmbientColor(new Color3f(1f,1f,0.8f));
+        mat.setDiffuseColor(new Color3f(1f,1f,0.8f));
+        mat.setSpecularColor(new Color3f(1f,1f,0.8f));
         mat.setLightingEnable(true);
         RenderingAttributes ra=new RenderingAttributes();
         ra.setIgnoreVertexColors(true);
@@ -291,7 +291,22 @@ public final class energon2 extends JPanel implements MouseBehaviorCallback {
             lineGroup.addChild(mtlist.get(k));
         }
         lineGroup.addChild(Translist);
+        lineGroup.addChild(createLight2());
+        Material ma = new Material();
+        ma.setDiffuseColor(1f, 1f, 0.0f);
+        ap.setMaterial(ma);
         return lineGroup;
+    }
+    
+    
+    private Light createLight2(){
+        DirectionalLight light = new DirectionalLight( true,
+                        new Color3f(1f, 1f, 0.0f),
+                        new Vector3f(-1.0f, -1.0f, -1.0f));
+
+        light.setInfluencingBounds(new BoundingSphere(new Point3d(), 100.0));
+  
+        return light;
     }
 
     public static void main(String[] args) {
