@@ -5,7 +5,6 @@ import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.SwingUtilities;
 import javax.swing.filechooser.*;
  
 /*
@@ -130,22 +129,25 @@ public class FileChooser extends JPanel
     public static void main(String[] args) {
         //Schedule a job for the event dispatch thread:
         //creating and showing this application's GUI.
-        SwingUtilities.invokeLater(new Runnable() {
+        /*SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 //Turn off metal's use of bold fonts
                 UIManager.put("swing.boldMetal", Boolean.FALSE); 
                 createAndShowGUI();
             }
             
-        });
-        int ans = Integer.parseInt( (String) JOptionPane.showInputDialog(frame,
+        });*/
+        /*int ans = Integer.parseInt( (String) JOptionPane.showInputDialog(frame,
                 "Please input a Height: ",
                 "Title", JOptionPane.INFORMATION_MESSAGE,
                 null,
                 null,""
                 ));
-        System.out.println(ans);
+        System.out.println(ans);*/
+        
+        energon2.main(args);
     }
+    
     public static Float getZ() {
     	Object x = ( JOptionPane.showInputDialog(frame,
                 "Please input a Height: ",
